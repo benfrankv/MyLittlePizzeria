@@ -11,7 +11,7 @@ class MLPYourCreationsViewModel: Globals {
     private var pizzaList = [Pizza]()
     
     let cellIdentifier = "pizzasCellIdentifier"
-    let title = "Pizzas"
+    let title = "Your Creations"
     var pizzaCount: Int { pizzaList.count }
     
     override init() {

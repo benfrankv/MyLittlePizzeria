@@ -47,8 +47,8 @@ class MLPPizzasTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        let detailViewController = MLPPizzaDetailsViewController()
+        let pizza = viewModel.pizza(at: indexPath)
+        let detailViewController = MLPPizzaDetailsViewController(pizza: pizza)
         navigationController?.pushViewController(detailViewController, animated: true)
     }
 
