@@ -34,6 +34,9 @@ class MLPTabBar: UITabBarController {
             items[2].image = pizzaShopIcon
             
             self.tabBar.backgroundColor = .systemBackground
+            self.tabBar.tintColor = .white
+            self.tabBar.backgroundColor = .systemRed
+            self.tabBar.unselectedItemTintColor = .darkGray
         }
 
 

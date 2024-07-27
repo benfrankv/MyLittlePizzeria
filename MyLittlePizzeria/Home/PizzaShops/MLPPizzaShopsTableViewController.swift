@@ -6,11 +6,19 @@
 //
 
 import UIKit
+import MapKit
+import CoreLocation
 
 class MLPPizzaShopsTableViewController: UITableViewController {
+    
+    let viewModel = MLPPizzaShopsViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = viewModel.title
+        navigationController?.navigationBar.prefersLargeTitles = true
+        
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: viewModel.cellIdentifier)
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -23,23 +31,34 @@ class MLPPizzaShopsTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return viewModel.pizzaShopsCount
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: viewModel.cellIdentifier, for: indexPath)
 
-        // Configure the cell...
+        let pizzeria = viewModel.pizzaShop(at: indexPath)
+        
+        var cellConfigurator =  cell.defaultContentConfiguration()
+        
+        cellConfigurator.text = pizzeria.name
+        
+        cell.contentConfiguration = cellConfigurator
 
         return cell
     }
-    */
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedPizzeria = viewModel.pizzaShop(at: indexPath)
+        
+        let detailViewController = MLPPizzaShopMapViewController(pizzaShopLocation: selectedPizzeria.coordinates)
+        present(detailViewController, animated: true)
+    }
 
     /*
     // Override to support conditional editing of the table view.
